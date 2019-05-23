@@ -1,0 +1,50 @@
+import exceptions
+# limit index would always be constant as we change the size as we move towards the root which is current_index
+
+find_left_index = lambda index: 2 * index + 1
+
+
+find_right_index = lambda index: 2 * index + 2
+
+
+find_parent = lambda index: index - 1 / 2
+
+
+def build_max_heap(input_list):
+    limit_index = len(input_list)-1
+    parent_limit_index = find_parent(limit_index)
+    current_index = parent_limit_index
+    while current_index >= 0:
+        heapify(input_list,current_index,limit_index)
+        current_index -= 1
+
+
+def find_largest_index(parent_index, limit_index, input_list):
+    left_index = find_left_index(parent_index)
+    right_index = find_right_index(parent_index)
+    largest_index = parent_index
+
+    if left_index > limit_index or right_index > limit_index:
+        return largest_index
+    else:
+        if input_list[left_index] > input_list[right_index]:
+            largest_index = left_index
+        else:
+            largest_index = right_index
+    if largest_index <= parent_index:
+        largest_index = parent_index
+    return largest_index
+
+
+def heapify(input_list, parent_index,limit_index):
+    largest_index = find_largest_index(parent_index, limit_index, input_list)
+    if largest_index == parent_index:
+        return
+    else:
+        input_list[largest_index], input_list[parent_index] = input_list[parent_index], input_list[largest_index]
+        heapify(input_list, largest_index, limit_index)
+
+
+input_list = [10,20,30]
+print heapify([10,20,30],0,2)
+print input_list

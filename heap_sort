@@ -10,13 +10,19 @@ find_right_index = lambda index: 2 * index + 2
 find_parent = lambda index: index - 1 / 2
 
 
-def build_max_heap(input_list):
+def build_max_heap_sort(input_list):
     limit_index = len(input_list)-1
     parent_limit_index = find_parent(limit_index)
     current_index = parent_limit_index
     while current_index >= 0:
         heapify(input_list,current_index,limit_index)
         current_index -= 1
+    
+    while limit_index >0:
+        input_list[0], input_list[limit_index] = input_list[limit_index], input_list[0]
+        limit_index -=1
+        heapify(input_list,0,limit_index)
+    return input_list
 
 
 def find_largest_index(parent_index, limit_index, input_list):

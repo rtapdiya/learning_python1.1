@@ -1,0 +1,38 @@
+from main.linked_list import LinkedList
+
+
+def reverse_linked_list(self):
+    prev = next = None
+    current = self.head
+    while current.next !=None:
+        next = current.next
+        current.next = prev
+        prev = current
+        current = next
+    head = prev
+
+def selection_sort(self):
+
+    temp = self.head
+
+    while temp.next != None:
+        min_element_pointer = selection_sort_helper(self,self.temp)
+        min_element_pointer.value , temp.value = temp.value, min_element_pointer.value
+
+
+def selection_sort_helper(self, temp):
+    min_element_pointer = self.temp
+    while temp.next != None:
+        if min_element_pointer.value > temp.value:
+            min_element_pointer = temp
+    return min_element_pointer
+
+
+l1 = LinkedList()
+l1.add_first(3)
+l1.add_first(8)
+l1.add_first(5)
+print selection_sort(l1)
+
+
+print str(l1)
